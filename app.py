@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, jsonify
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -13,7 +15,7 @@ migrate = Migrate(app, db)
 
 @app.route('/')
 def example():
-    response = jsonify({'message': 'ok'})
+    response = jsonify({'message': os.urandom(16).hex()})
     response.status_code = 200
     return response
 
