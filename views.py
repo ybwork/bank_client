@@ -12,6 +12,7 @@ from middleware import *
 
 @views.route('/', methods=['POST'])
 def home():
-    response = jsonify({'message': 'home'})
-    response.status_code = 209
-    return response
+    return send_json_response(
+        message={'message': 'home'},
+        status_code=200
+    )

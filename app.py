@@ -8,6 +8,7 @@ app = Flask(__name__)
 app.config.from_pyfile('settings.py', silent=True)
 app.register_blueprint(views)
 db = SQLAlchemy(app)
+import models
 migrate = Migrate(app, db)
 
 

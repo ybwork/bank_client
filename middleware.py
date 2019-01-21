@@ -1,7 +1,20 @@
+from flask import request
+
 from forms import AuthForm
 from models import App
 from utils import send_json_response
 from views import views
+
+
+@views.before_request
+def exchange_format():
+    if not request.is_json:
+        return send_json_response(
+            message={
+                'message': 'Не валидный формат. Должен быть JSON.'
+            },
+            status_code=400
+        )
 
 
 @views.before_request
@@ -16,8 +29,8 @@ def auth():
 
     if not is_valid_api_key(api_key=form.api_key.data):
         return send_json_response(
-            message={'message': 'fuck'},
-            status_code=400
+            message={'message': 'Ошибка аутентификации'},
+            status_code=401
         )
 
 
